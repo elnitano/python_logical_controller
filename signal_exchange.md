@@ -54,7 +54,7 @@
 | Output 12 | Sweeper 3 Arm | Control the Arm for Sweeper 3 (Large Package)
 | Output 13 | Unused Output | Available
 | Output 14 | Unused Output | Available
-| Output 15 | Unused Output | Available
+| Output 15 | Product Spawn | Enable products to be spawned on Input Conveyor
 | Output 16 | Unused Output | Available
 | Output 17 | Unused Output | Available
 | Output 18 | Unused Output | Available
