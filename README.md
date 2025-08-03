@@ -24,12 +24,6 @@ Goal would be to have a small logistic simulation, sorting 3 types of boxes into
 
 Once the baseline has been established, this can be extended into a larger fully fletched logistics system, implementing various machines in the process.
 
-### Currently working on:
- - [x] Create the scenario in FactoryIO for our sorting line.
- - [x] Make sure the Python program can work with FactoryIO (Establish connection via pyModbusTCP)
- - [x] Create software to Read Inputs and Write Outputs - Should be (Read IO -> Execute Software -> Write IO).
- - [x] Create Groupstart software, to handle Start/Stop of the Plant.
- - [x] Create Conveyor software, this should inherit Groupstart, and handle the controls of Conveyors, with sensors ect.
- - [x] Create Sweeper software, this should inherit Groupstart, and handle the sweeper for boxes, with motor ect.
- - [x] Create Tracking software, this should track our product, assigning the sweeper output needed.
- - [x] Create Scale software, this should stop the conveyor, read the scale once stable, determine box type, add it to tracking software.
+### Things to add in the future:
+ - [ ] Make values configurable, as the moment all values are just fixed in the code - should have a config file for example when sweeper arms should open ect.
+ - [ ] Try and integrate the Static Site Generator with this code base, so have a little web UI to see what happens under the hood.
