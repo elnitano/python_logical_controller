@@ -1,5 +1,5 @@
 def main():
-    print("Hello from python-logical-controller!")
+    print("Checking if Boot.Dev registers my commits!")
 
 
 if __name__ == "__main__":
