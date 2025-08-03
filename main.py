@@ -2,6 +2,8 @@ from plc_class.modbus import mb_client
 from plc_class.group_start import Group_Start
 from plc_class.conveyor import Conveyor
 from plc_class.sweeper import Sweeper
+from plc_class.tracking import Tracking
+from plc_class.scale import Scale
 from plc_function.scan_time import Scan_Time
 
 
@@ -23,9 +25,15 @@ def main():
     large_box_conveyor_1 = Conveyor(group, 7)
 
     # Create instances for Sweepers
-    sweeper_1 = Sweeper(2000)
-    sweeper_2 = Sweeper(2000)
-    sweeper_3 = Sweeper(2000)
+    sweeper_1 = Sweeper(2500)
+    sweeper_2 = Sweeper(2500)
+    sweeper_3 = Sweeper(2500)
+
+    # Create instance for Tracking
+    tracking = Tracking()
+
+    # Create instance for Scale
+    scale = Scale()
 
     # Create Block for Input Conveyor & Scale Conveyor
     block_input_conveyor_1 = False
@@ -44,11 +52,22 @@ def main():
         start_button = digital_input["Group Start"]
         stop_button = not digital_input["Group Stop"]
 
+        #Get Weight and Update Instance
+        current_weight = modbus.read_scale()
+        current_package, block_scale_conveyor_1 = scale.update(current_weight, digital_input["Scale Conveyor 1 B1"], cycle_time)
+
+        tracking_input = 0
+        if digital_input["Input Conveyor 1 B1"]:
+            tracking_input = current_package
+
         #Handling conveyor stop of Input and Scale Conveyor
         block_input_conveyor_1 = digital_input["Input Conveyor 1 B1"] and digital_input["Scale Conveyor 1 B1"]
 
         #Update Group Start
         group_ready, group_running, group_starting, group_stopped = group.update(digital_input["FACTORY I/O (Running)"], start_button, stop_button, cycle_time)
+
+        #Update Tracking
+        tracking.update(digital_input["Output Conveyor Encoder A"], tracking_input)
 
         #Update Conveyors
         digital_output["Input Conveyor 1 (F)"] = input_conveyor_1.update(group, block_input_conveyor_1)
@@ -60,9 +79,9 @@ def main():
         digital_output["Large Box Conveyor 1 (F)"] = large_box_conveyor_1.update(group)
 
         #Update Sweeper
-        digital_output["Sweeper 1 Arm"], digital_output["Sweeper 1 Motor (F)"] = sweeper_1.update(group_running, False, cycle_time)
-        digital_output["Sweeper 2 Arm"], digital_output["Sweeper 2 Motor (F)"] = sweeper_2.update(group_running, digital_input["Input 5"], cycle_time)
-        digital_output["Sweeper 3 Arm"], digital_output["Sweeper 3 Motor (F)"] = sweeper_3.update(group_running, False, cycle_time)
+        digital_output["Sweeper 1 Arm"], digital_output["Sweeper 1 Motor (F)"] = sweeper_1.update(group_running, tracking.check(1, 180), cycle_time)
+        digital_output["Sweeper 2 Arm"], digital_output["Sweeper 2 Motor (F)"] = sweeper_2.update(group_running, tracking.check(2, 480), cycle_time)
+        digital_output["Sweeper 3 Arm"], digital_output["Sweeper 3 Motor (F)"] = sweeper_3.update(group_running, tracking.check(3, 880), cycle_time)
 
         #Update Lamps
         digital_output["Group Stopped"] = group_stopped
@@ -78,6 +97,6 @@ def main():
         modbus.write_digital_output(digital_output)
 
         #Console log
-        print(f'Factory IO Running: {group_ready}  | Cycle Time: {cycle_time}ms            \r', flush=True, end="")
+        print(f'Factory IO Running: {group_ready} {current_package} {current_weight}  | Cycle Time: {cycle_time}ms            \r', flush=True, end="")
 if __name__ == "__main__":
     main()
