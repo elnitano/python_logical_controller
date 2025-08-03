@@ -25,6 +25,6 @@ Once the baseline has been established, this can be extended into a larger fully
  - [x] Create software to Read Inputs and Write Outputs - Should be (Read IO -> Execute Software -> Write IO).
  - [x] Create Groupstart software, to handle Start/Stop of the Plant.
  - [x] Create Conveyor software, this should inherit Groupstart, and handle the controls of Conveyors, with sensors ect.
- - [ ] Create Sweeper software, this should inherit Groupstart, and handle the sweeper for boxes, with motor ect.
+ - [x] Create Sweeper software, this should inherit Groupstart, and handle the sweeper for boxes, with motor ect.
  - [ ] Create Tracking software, this should track our product, assigning the sweeper output needed.
  - [ ] Create Scale software, this should stop the conveyor, read the scale once stable, determine box type, add it to tracking software.

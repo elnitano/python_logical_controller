@@ -1,6 +1,7 @@
 from plc_class.modbus import mb_client
 from plc_class.group_start import Group_Start
 from plc_class.conveyor import Conveyor
+from plc_class.sweeper import Sweeper
 from plc_function.scan_time import Scan_Time
 
 
@@ -20,6 +21,11 @@ def main():
     small_box_conveyor_1 = Conveyor(group, 5)
     medium_box_conveyor_1 = Conveyor(group, 6)
     large_box_conveyor_1 = Conveyor(group, 7)
+
+    # Create instances for Sweepers
+    sweeper_1 = Sweeper(2000)
+    sweeper_2 = Sweeper(2000)
+    sweeper_3 = Sweeper(2000)
 
     # Create Block for Input Conveyor & Scale Conveyor
     block_input_conveyor_1 = False
@@ -53,6 +59,11 @@ def main():
         digital_output["Medium Box Conveyor 1 (F)"] = medium_box_conveyor_1.update(group)
         digital_output["Large Box Conveyor 1 (F)"] = large_box_conveyor_1.update(group)
 
+        #Update Sweeper
+        digital_output["Sweeper 1 Arm"], digital_output["Sweeper 1 Motor (F)"] = sweeper_1.update(group_running, False, cycle_time)
+        digital_output["Sweeper 2 Arm"], digital_output["Sweeper 2 Motor (F)"] = sweeper_2.update(group_running, digital_input["Input 5"], cycle_time)
+        digital_output["Sweeper 3 Arm"], digital_output["Sweeper 3 Motor (F)"] = sweeper_3.update(group_running, False, cycle_time)
+
         #Update Lamps
         digital_output["Group Stopped"] = group_stopped
         digital_output["Group Starting"] = group_starting
@@ -67,6 +78,6 @@ def main():
         modbus.write_digital_output(digital_output)
 
         #Console log
-        print(f'Factory IO Running: {group_ready} | Cycle Time: {cycle_time}ms            \r', flush=True, end="")
+        print(f'Factory IO Running: {group_ready}  | Cycle Time: {cycle_time}ms            \r', flush=True, end="")
 if __name__ == "__main__":
     main()

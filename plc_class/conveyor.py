@@ -1,3 +1,9 @@
+#plc_class/conveyor.py
+#
+# Handling basic conveyors
+# Starts when designated start_number comes from Groupstart
+# Stops conveyor if block is True
+
 class Conveyor():
     def __init__(self, Group_Start, start_number):
         self.ready = Group_Start.ready
