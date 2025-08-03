@@ -49,7 +49,7 @@ digital_output_dict = {
     "Sweeper 3 Arm": False,
     "Output 13": False,
     "Output 14": False,
-    "Output 15": False,
+    "Product Spawn": False,
     "Output 16": False,
     "Output 17": False,
     "Output 18": False,
