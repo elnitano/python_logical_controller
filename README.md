@@ -27,3 +27,4 @@ Once the baseline has been established, this can be extended into a larger fully
  - [ ] Create Conveyor software, this should inherit Groupstart, and handle the controls of Conveyors, with sensors ect.
  - [ ] Create Sweeper software, this should inherit Groupstart, and handle the sweeper for boxes, with motor ect.
  - [ ] Create Tracking software, this should track our product, assigning the sweeper output needed.
+ - [ ] Create Scale software, this should stop the conveyor, read the scale once stable, determine box type, add it to tracking software.
