@@ -49,3 +49,8 @@ We will create an empty list of first 1000 entries.
 The sorted package will write to the first position in our list.
 
 When Encoder bit is active, it should move the entire list 1 position forward.
+
+Destinations:
+ - First conveyor is for Small packages
+ - Second conveyor is for Medium packages
+ - Third conveyor is for Large packages
