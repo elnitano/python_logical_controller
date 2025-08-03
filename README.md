@@ -20,8 +20,8 @@ Goal would be to have a small logistic simulation, sorting 3 types of boxes into
 Once the baseline has been established, this can be extended into a larger fully fletched logistics system, implementing various machines in the process.
 
 ### Currently working on:
- - [ ] Create the scenario in FactoryIO for our sorting line.
- - [ ] Make sure the Python program can work with FactoryIO (Establish connection via pyModbusTCP)
+ - [x] Create the scenario in FactoryIO for our sorting line.
+ - [x] Make sure the Python program can work with FactoryIO (Establish connection via pyModbusTCP)
  - [ ] Create software to Read Inputs and Write Outputs - Should be (Read IO -> Execute Software -> Write IO).
  - [ ] Create Groupstart software, to handle Start/Stop of the Plant.
  - [ ] Create Conveyor software, this should inherit Groupstart, and handle the controls of Conveyors, with sensors ect.
