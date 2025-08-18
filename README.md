@@ -26,4 +26,3 @@ Once the baseline has been established, this can be extended into a larger fully
 
 ### Things to add in the future:
  - [ ] Make values configurable, as the moment all values are just fixed in the code - should have a config file for example when sweeper arms should open ect.
- - [ ] Try and integrate the Static Site Generator with this code base, so have a little web UI to see what happens under the hood.
